@@ -11,6 +11,16 @@ spacex_df = pd.read_csv("spacex_launch_dash.csv")
 max_payload = spacex_df['Payload Mass (kg)'].max()
 min_payload = spacex_df['Payload Mass (kg)'].min()
 
+unique_launch_sites = spacex_df['Launch Site'].unique().tolist()
+launch_sites = []
+launch_sites.append({'label': 'All Sites', 'value': 'All Sites'})
+for launch_site in unique_launch_sites:
+    launch_sites.append({'label': launch_site, 'value': launch_site})
+
+marks_dict = {}
+for i in range(0,11000,1000):
+    marks_dict[i] = {'label': str(i)+' Kg'}
+
 # Create a dash application
 app = dash.Dash(__name__)
 
